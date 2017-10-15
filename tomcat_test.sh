@@ -31,7 +31,7 @@ echo "---------------------------"
 service tomcat8 status
 echo ""
 
-sleep 2 2 
+sleep 2
 
 echo "Check application home page"
 echo "---------------------------"
