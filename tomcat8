@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PID=$(ps -ef | grep apache | grep -v grep | tr -s " " | cut -d' ' -f2)
+
+status() {
+  if [ ! -z "$PID" ]
+  then
+    echo "tomcat8 is running... [pid $PID]"
+  else
+    echo "tomcat8 is not running."
+  fi
+}
+
+case $1 in
+  status)
+    status
+    ;;
+esac
+
+exit 0

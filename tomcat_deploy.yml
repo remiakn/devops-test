@@ -1,0 +1,44 @@
+---
+- hosts: local 
+  vars:
+   my_env: "{{ env }}"
+
+  tasks:
+  - name: Java Install
+    apt:
+      name: default-jdk
+      state: present
+
+  - name: Download tomcat 8
+    get_url:
+      url: http://apache.crihan.fr/dist/tomcat/tomcat-8/v8.0.47/bin/apache-tomcat-8.0.47.tar.gz
+      dest: /tmp/apache-tomcat-8.0.47.tar.gz
+
+  - name: Extraire archive tomcat
+    unarchive:
+      src: /tmp/apache-tomcat-8.0.47.tar.gz
+      dest: /opt
+
+  - name: Copy sample.war to tomcat webapps folder
+    copy:
+      src: /tmp/sample.war
+      dest: /opt/apache-tomcat-8.0.47/webapps
+
+  - name: Launch tomcat with DEV heap size
+    command: /opt/apache-tomcat-8.0.47/bin/startup.sh -Xmx256m
+    when: my_env == "DEV"
+  
+  - name: Launch tomcat with PROD heap size
+    command: /opt/apache-tomcat-8.0.47/bin/startup.sh -Xmx512m
+    when: my_env == "PROD"
+
+  - name: Creation of log directory
+    file:
+      path: /var/log/tomcat8
+      state: directory
+
+  - name: Symblic link for tomcat logs 
+    file:
+      src: /opt/apache-tomcat-8.0.47/logs/catalina.out 
+      dest: /var/log/tomcat8/catalina.out
+      state: link
