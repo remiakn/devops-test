@@ -13,4 +13,4 @@
   - COPY tomcat8 /etc/init.d/
   - RUN chmod 755 /etc/init.d/tomcat8
   
-- **Ajout**: 'sleep 2' dans le script *tomcat_test.sh* sinon les commandes 'curl' et 'cat' sont exécuté avant que le tomcat8 est terminé de démarré
+- **Ajout**: 'sleep 2' dans le script *tomcat_test.sh* sinon les commandes 'curl' et 'cat' sont exécutées avant que le tomcat8 ai terminé de démarrer
