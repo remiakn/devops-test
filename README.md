@@ -5,7 +5,7 @@
 - - -
 
 - **Ajout**: Script *tomcat8* pour obtenir (seulement) le status du process tomcat8
-- **Ajout**: Dans le *Dockerfile* les 5 dernières lignes afin de copier les fichiers du repo vers dans le conteneur 
+- **Ajout**: Dans le *Dockerfile* les 5 dernières lignes afin de copier les fichiers du repo dans le conteneur 
 
   - COPY tomcat_test.sh /tmp/
   - COPY sample.war /tmp/
